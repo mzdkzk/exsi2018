@@ -1,6 +1,6 @@
 <?php
-  require_once("phpQuery-onefile.php");
-  require_once("pathChanger.php");
+  require_once("lib/phpQuery-onefile.php");
+  require_once("lib/pathChanger.php");
   $url = "http://www.wakayama-u.ac.jp/scenter/basic/calendar/calendar_h31.html";
   $doc = phpQuery::newDocumentFileHtml($url);
 

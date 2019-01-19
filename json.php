@@ -41,5 +41,5 @@
     $result = array_merge($result, get_date($data));
   }
 
-  header('Content-type: text/plain');
+  header("Content-Type: application/json; charset=UTF-8");
   echo json_encode(["result" => $result, "length" => count($result)], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

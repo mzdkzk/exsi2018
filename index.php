@@ -9,7 +9,7 @@
 <head>
   <meta charset="UTF-8">
   <title>平成31年度和歌山大学カレンダー</title>
-  <link rel="stylesheet" href="/css/fullcalendar.min.css">
+  <link rel="stylesheet" href="css/fullcalendar.min.css">
 </head>
 <body>
 <h1>平成31年度和歌山大学カレンダー</h1>
@@ -20,10 +20,18 @@
   echo "</p>";
 ?>
 <div id='calendar'></div>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/moment.min.js"></script>
-<script src="/js/fullcalendar.min.js"></script>
-<script src="/js/locale/ja.js"></script>
-<script src="index.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/moment.min.js"></script>
+<script src="js/fullcalendar.min.js"></script>
+<script src="js/locale/ja.js"></script>
+<script>
+$(document).ready(function() {
+  $.get('json.php', function(data) {
+    $('#calendar').fullCalendar({
+      events: JSON.parse(data).result
+    })
+  })
+})
+</script>
 </body>
 </html>

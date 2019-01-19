@@ -8,37 +8,23 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Web情報収集システム</title>
-  <style>
-  div {
-    float: left;
-    background: #ffffff;
-    width: 300px;
-    padding: 20px;
-    text-align: left;
-    border: 1px solid #cccccc;
-    margin: 15px 5px 10px 4px;
-  }
-
-  body {
-    background: #f0f8ff;
-    color: #ff6600;
-  }
-  </style>
+  <title>2019年和歌山大学カレンダー</title>
+  <link rel="stylesheet" href="/js/fullcalendar.min.css">
 </head>
 <body>
-<h1>Web情報収集システム</h1>
+<h1>2019年和歌山大学カレンダー</h1>
 <?php
-  echo "<div>";
+  echo "<div style='margin-bottom: 20px'>";
   echo "取得サイト:" . $doc["title"]->text() . "<br>";
+  echo sprintf("<a href='%s'>%s</a>", $url, $url);
   echo $doc[".update>dd"];
   echo "</div>";
-
-  echo '<div class="image-contents">';
-  foreach ($doc[".fl"]->find("li") as $li) {
-    echo pq($li)->text() . "<br>";
-  }
-  echo "</div>";
 ?>
+<div id='calendar'></div>
+<script src="/js/lib/jquery.min.js"></script>
+<script src="/js/lib/moment.min.js"></script>
+<script src="/js/fullcalendar.min.js"></script>
+<script src="/js/locale/ja.js"></script>
+<script src="index.js"></script>
 </body>
 </html>

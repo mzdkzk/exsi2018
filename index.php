@@ -8,17 +8,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>2019年和歌山大学カレンダー</title>
+  <title>平成31年度和歌山大学カレンダー</title>
   <link rel="stylesheet" href="/js/fullcalendar.min.css">
 </head>
 <body>
-<h1>2019年和歌山大学カレンダー</h1>
+<h1>平成31年度和歌山大学カレンダー</h1>
 <?php
-  echo "<div style='margin-bottom: 20px'>";
+  echo "<p>";
   echo "取得サイト:" . $doc["title"]->text() . "<br>";
   echo sprintf("<a href='%s'>%s</a>", $url, $url);
-  echo $doc[".update>dd"];
-  echo "</div>";
+  echo "</p>";
 ?>
 <div id='calendar'></div>
 <script src="/js/lib/jquery.min.js"></script>

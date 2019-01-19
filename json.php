@@ -7,25 +7,32 @@
   function get_date($data) {
     $event = mb_strcut($data, 22, strlen($data));
     $event = preg_replace('/　/', ' ', $event);
-    $event = preg_replace('/\s+/', ',', $event);
-    // $events = explode(",", $event);
+    $event = preg_replace('/\s+/', ' ', $event);
+    if ($event == "") {
+      return [];
+    }
 
     $data = explode("月", $data);
     $month = mb_convert_kana($data[0], 'n');
     $data = explode("日", $data[1]);
     $day = mb_convert_kana($data[0], 'n');
 
-    return ["title" => $event, "start" => sprintf("2019-%02d-%02d", $month, $day)];
+    $year = 2018;
+    if (intval($month) < 4) {
+      $year = 2019;
+    }
+
+    return ["title" => $event, "start" => sprintf("%d-%02d-%02d", $year, $month, $day)];
   }
 
   $result = [];
   foreach ($doc[".fl"]->find("li") as $li) {
     $data = pq($li)->text();
-    array_push($result, get_date($data));
+    $result[] = get_date($data);
   }
   foreach ($doc[".fr"]->find("li") as $li) {
     $data = pq($li)->text();
-    array_push($result, get_date($data));
+    $result[] = get_date($data);
   }
 
   header('Content-type: text/plain');

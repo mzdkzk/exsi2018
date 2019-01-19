@@ -4,10 +4,16 @@
   $url = "http://www.wakayama-u.ac.jp/scenter/basic/calendar/calendar_h31.html";
   $doc = phpQuery::newDocumentFileHtml($url);
 
-  function get_date($data) {
+  function get_date($data)
+  {
     $event = mb_strcut($data, 22, strlen($data));
     $event = preg_replace('/　/', ' ', $event);
-    $event = preg_replace('/\s+/', ' ', $event);
+    $event = trim($event);
+    // 整形して中に残った半角を区切り文字に
+    $event = preg_replace('/\s+/', ',', $event);
+    $events = explode(",", $event);
+
+    // 無関係なデータを除外
     if ($event == "") {
       return [];
     }
@@ -22,17 +28,17 @@
       $year = 2019;
     }
 
-    return ["title" => $event, "start" => sprintf("%d-%02d-%02d", $year, $month, $day)];
+    $r = [];
+    foreach ($events as $e) {
+      $r[] = ["title" => $e, "start" => sprintf("%d-%02d-%02d", $year, $month, $day)];
+    }
+    return $r;
   }
 
   $result = [];
-  foreach ($doc[".fl"]->find("li") as $li) {
+  foreach ($doc[".block"]->find("li") as $li) {
     $data = pq($li)->text();
-    $result[] = get_date($data);
-  }
-  foreach ($doc[".fr"]->find("li") as $li) {
-    $data = pq($li)->text();
-    $result[] = get_date($data);
+    $result = array_merge($result, get_date($data));
   }
 
   header('Content-type: text/plain');

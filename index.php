@@ -15,7 +15,7 @@
 <h1>平成31年度和歌山大学カレンダー</h1>
 <?php
   echo "<p>";
-  echo "取得サイト:" . $doc["title"]->text() . "<br>";
+  echo sprintf("取得サイト:%s<br>", $doc["title"]->text());
   echo sprintf("<a href='%s'>%s</a>", $url, $url);
   echo "</p>";
 ?>

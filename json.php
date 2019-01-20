@@ -1,22 +1,25 @@
 <?php
+  mb_internal_encoding("UTF-8");
   require_once("lib/phpQuery-onefile.php");
   require_once("lib/pathChanger.php");
+
   $url = "http://www.wakayama-u.ac.jp/scenter/basic/calendar/calendar_h31.html";
   $doc = phpQuery::newDocumentFileHtml($url);
 
   function get_date($data)
   {
-    $event = mb_strcut($data, 22, strlen($data));
-    $event = preg_replace('/　/', ' ', $event);
-    $event = trim($event);
-    // 整形して中に残った半角を区切り文字に
-    $event = preg_replace('/\s+/', ',', $event);
-    $events = explode(",", $event);
-
+    preg_match("/(?<=）)(.*)/", $data, $event);
     // 無関係なデータを除外
-    if ($event == "") {
+    if (!$event) {
       return [];
     }
+
+    // 全角スペース除去
+    $event = preg_replace('/　/', ' ', $event[0]);
+    $event = trim($event);
+    // 整形して中に残った半角スペースを区切り文字に
+    $event = preg_replace('/\s+/', ',', $event);
+    $events = explode(",", $event);
 
     $data = explode("月", $data);
     $month = mb_convert_kana($data[0], 'n');

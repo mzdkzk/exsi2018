@@ -9,18 +9,33 @@
   <meta charset="UTF-8">
   <title>平成31年度和歌山大学カレンダー</title>
   <link rel="stylesheet" href="css/fullcalendar.min.css">
+  <style>
+    body {
+      background-color: #cccccc;
+      padding: 40px;
+    }
+    main {
+      background-color: #ffffff;
+      padding: 40px;
+    }
+    p {
+      word-break: break-all;
+    }
+  </style>
 </head>
 <body>
-<h1>平成31年度和歌山大学カレンダー</h1>
-<?php
-  $url = "http://www.wakayama-u.ac.jp/scenter/basic/calendar/calendar_h31.html";
-  $doc = phpQuery::newDocumentFileHtml($url);
-  echo "<p>";
-  echo sprintf("取得サイト:%s<br>", $doc["title"]->text());
-  echo sprintf("<a href='%s'>%s</a>", $url, $url);
-  echo "</p>";
-?>
-<div id='calendar'></div>
+<main>
+  <h1>平成31年度和歌山大学カレンダー</h1>
+  <?php
+    $url = "http://www.wakayama-u.ac.jp/scenter/basic/calendar/calendar_h31.html";
+    $doc = phpQuery::newDocumentFileHtml($url);
+    echo "<p>";
+    echo sprintf("取得サイト:%s<br>", $doc["title"]->text());
+    echo sprintf("<a href='%s'>%s</a>", $url, $url);
+    echo "</p>";
+  ?>
+  <div id='calendar'></div>
+</main>
 <script src="js/jquery.min.js"></script>
 <script src="js/moment.min.js"></script>
 <script src="js/fullcalendar.min.js"></script>

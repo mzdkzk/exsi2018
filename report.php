@@ -1,4 +1,5 @@
 <?php
+  mb_internal_encoding("UTF-8");
   require_once("lib/phpQuery-onefile.php");
   require_once("lib/pathChanger.php");
 ?>

@@ -7,7 +7,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>平成31年度和歌山大学カレンダー</title>
+  <title>和歌山大学カレンダー</title>
   <link rel="stylesheet" href="css/fullcalendar.min.css">
   <style>
     body {
@@ -17,6 +17,8 @@
     main {
       background-color: #ffffff;
       padding: 40px;
+      margin: 0 auto;
+      max-width: 800px;
     }
     p {
       word-break: break-all;
@@ -25,9 +27,9 @@
 </head>
 <body>
 <main>
-  <h1>平成31年度和歌山大学カレンダー</h1>
+  <h1>和歌山大学カレンダー</h1>
   <?php
-    $url = "http://www.wakayama-u.ac.jp/scenter/basic/calendar/calendar_h31.html";
+    $url = "http://www.wakayama-u.ac.jp/scenter/basic/calendar/calendar_h30.html";
     $doc = phpQuery::newDocumentFileHtml($url);
     echo "<p>";
     echo sprintf("取得サイト:%s<br>", $doc["title"]->text());
@@ -43,9 +45,6 @@
 <script>
 $(document).ready(function() {
   <?php
-  $url = "http://www.wakayama-u.ac.jp/scenter/basic/calendar/calendar_h31.html";
-  $doc = phpQuery::newDocumentFileHtml($url);
-
   function get_date($data)
   {
     preg_match("/(?<=）)(.*)/", $data, $event);
